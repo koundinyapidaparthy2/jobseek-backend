@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <style>
+    @page {
+      size: A4;
+      margin: 1in;
+    }
+    body {
+      font-family: 'Arial', sans-serif;
+      font-size: 12px;
+      line-height: 1.6;
+    }
+    h1 { text-align: center; text-transform: uppercase; font-size: 20px; margin-bottom: 4px; }
+    .subtitle { text-align: center; font-size: 13px; margin-bottom: 12px; }
+    .section { margin-top: 20px; }
+    .section-title { font-weight: bold; text-transform: uppercase; font-size: 13px; margin-bottom: 6px; }
+    ul { margin: 0; padding-left: 20px; }
+    li { margin-bottom: 6px; }
+  </style>
+</head>
+<body>
+
+<h1>{{name}}</h1>
+<div class="subtitle">{{role}}</div>
+<div style="text-align:center;">
+  {{location}} | {{phone}} | <a href="mailto:{{email}}">{{email}}</a> |
+  <a href="{{linkedin}}">LinkedIn</a> |
+  <a href="{{github}}">GitHub</a> |
+  <a href="{{portfolio}}">Portfolio</a>
+</div>
+
+<div class="section">
+    <div class="section-title">Education</div>
+    {{#education}}
+    <div class="edu">
+      <div class="row">
+        <div class="label-bold">{{university}}</div>
+        <div>{{location}}</div>
+      </div>
+      <div>{{degree}} | GPA: {{gpa}}</div>
+      <div>{{graduation_date}}</div>
+    </div>
+    {{/education}}
+  </div>
+
+  <div class="section">
+    <div class="section-title">Technical Skills</div>
+    {{#skills}}
+    <div><span class="label-bold">{{category}}:</span> {{technologies}}</div>
+    {{/skills}}
+  </div>
+
+  <div class="section">
+    <div class="section-title">Experience</div>
+    {{#experience}}
+    <div class="exp">
+      <div class="row">
+        <div class="label-bold">{{title}} | {{location}}</div>
+        <div>{{date_range}}</div>
+      </div>
+      <div class="label-bold">{{company}}</div>
+      <ul>
+        {{#bullets}}
+        <li>{{.}}</li>
+        {{/bullets}}
+      </ul>
+    </div>
+    {{/experience}}
+  </div>
+
+  <div class="section">
+    <div class="section-title">Projects</div>
+    {{#projects}}
+    <div class="proj">
+      <div class="row">
+        <div><span class="label-bold">{{title}}</span> (<a href="{{link}}" class="link">{{link}}</a>)</div>
+        <div>{{date_range}}</div>
+      </div>
+      <ul>
+        {{#bullets}}
+        <li>{{.}}</li>
+        {{/bullets}}
+      </ul>
+    </div>
+    {{/projects}}
+  </div>
+
+  <div class="section">
+    <div class="section-title">Certifications</div>
+    {{#certifications}}
+    <div class="cert">
+      {{name}} (<a href="{{link}}" class="link">{{link}}</a>) — {{date}}
+    </div>
+    {{/certifications}}
+  </div>
+
+</body>
+</html>

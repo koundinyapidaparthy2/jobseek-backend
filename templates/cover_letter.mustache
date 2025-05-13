@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>{{name}} - Cover Letter</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 40px;
+      color: #000;
+      font-size: 12px;
+      line-height: 1.6;
+    }
+    .header {
+      font-size: 13px;
+      margin-bottom: 5px;
+    }
+    .header a {
+      color: #0645AD;
+      text-decoration: none;
+    }
+    .title {
+      font-weight: bold;
+      margin: 20px 0 10px;
+    }
+    .salutation {
+      margin-bottom: 10px;
+    }
+    .paragraph {
+      margin-bottom: 12px;
+    }
+    .closing {
+      margin-top: 20px;
+    }
+    .signature {
+      font-weight: bold;
+      margin-top: 8px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <div><strong>{{name}}</strong></div>
+    <div>{{location}} | {{phone}} | <a href="mailto:{{email}}">{{email}}</a></div>
+    <div><a href="{{linkedin}}">LinkedIn</a> | <a href="{{github}}">GitHub</a> | <a href="{{portfolio}}">Portfolio</a></div>
+  </div>
+
+  <div class="title">Subject: Application for {{role}}</div>
+
+  <div class="salutation">Dear {{company}} Hiring Team,</div>
+
+  <div class="paragraph">{{paragraph1}}</div>
+  <div class="paragraph">{{paragraph2}}</div>
+  <div class="paragraph">{{paragraph3}}</div>
+
+  <div class="closing">
+    Warm regards,<br>
+    <div class="signature">{{name}}</div>
+  </div>
+
+</body>
+</html>
