@@ -10,7 +10,7 @@ const {
 const router = express.Router();
 
 function generateTokens(user) {
-  const payload = { email: user.email };
+  const payload = { id: user.id, email: user.email };
   const accessToken = generateAccessToken(payload);
   const refreshToken = generateRefreshToken(payload);
   return { accessToken, refreshToken };
@@ -26,7 +26,10 @@ router.post("/signup", async (req, res) => {
     const hashed = await bcrypt.hash(password, 10);
     const user = await createUser({ email, password: hashed, name });
     const tokens = generateTokens(user);
-    res.json({ user: { email: user.email, name: user.name }, ...tokens });
+    res.json({
+      user: { id: user.id, email: user.email, name: user.name },
+      ...tokens,
+    });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
@@ -44,7 +47,10 @@ router.post("/login", async (req, res) => {
     if (!valid) return res.status(400).json({ error: "Invalid credentials" });
 
     const tokens = generateTokens(user);
-    res.json({ user: { email: user.email, name: user.name }, ...tokens });
+    res.json({
+      user: { id: user.id, email: user.email, name: user.name },
+      ...tokens,
+    });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
@@ -59,7 +65,10 @@ router.post("/google", async (req, res) => {
       user = await createUser({ email, name, googleId });
     }
     const tokens = generateTokens(user);
-    res.json({ user: { email: user.email, name: user.name }, ...tokens });
+    res.json({
+      user: { id: user.id, email: user.email, name: user.name },
+      ...tokens,
+    });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }

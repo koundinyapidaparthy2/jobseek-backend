@@ -1,18 +1,41 @@
-// models/User.js
 const { db } = require("../utils/firebase.js");
+const { v4: uuidv4 } = require("uuid");
 
 const USERS_COLLECTION = db.collection("users");
 
 async function createUser({ email, password, name, googleId }) {
-  const userRef = USERS_COLLECTION.doc(email);
-  await userRef.set({ email, password, name, googleId, createdAt: new Date() });
-  const snapshot = await userRef.get();
-  return snapshot.data();
+  const uuid = uuidv4();
+
+  const userDoc = {
+    id: uuid,
+    email,
+    password,
+    name,
+    googleId,
+    createdAt: new Date(),
+  };
+
+  await USERS_COLLECTION.doc(uuid).set(userDoc);
+  return userDoc;
 }
 
 async function findUserByEmail(email) {
-  const snapshot = await USERS_COLLECTION.doc(email).get();
-  return snapshot.exists ? snapshot.data() : null;
+  const snapshot = await USERS_COLLECTION.where("email", "==", email)
+    .limit(1)
+    .get();
+  if (snapshot.empty) return null;
+
+  const doc = snapshot.docs[0];
+  return doc.data();
 }
 
-module.exports = { createUser, findUserByEmail };
+async function findUserById(userId) {
+  const doc = await USERS_COLLECTION.doc(userId).get();
+  return doc.exists ? doc.data() : null;
+}
+
+module.exports = {
+  createUser,
+  findUserByEmail,
+  findUserById,
+};

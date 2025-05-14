@@ -1,11 +1,11 @@
-// utils/firebase.js
 const admin = require("firebase-admin");
-const serviceAccount = require("../firebase-service-account.json"); // get this from GCP console
+const serviceAccount = require("../firebase-service-account.json");
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
 });
 
 const db = admin.firestore();
+db.settings({ ignoreUndefinedProperties: true });
 
 module.exports = { db };
