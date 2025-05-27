@@ -1,9 +1,21 @@
+# Use Node.js LTS
 FROM node:22
 
+# Create app directory
 WORKDIR /app
+
+# Copy package.json and install dependencies
+COPY package.json ./
+RUN npm install
+
+# Dockerfile
+COPY firebase-service-account.json ./firebase-service-account.json
+
+# Copy source code
 COPY . .
 
-RUN npm install
+# Expose the port your app runs on
 EXPOSE 8080
 
-CMD ["nodemon", "index.js"]
+# Start the app
+CMD ["npm", "start"]
