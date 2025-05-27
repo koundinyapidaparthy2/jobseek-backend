@@ -1,0 +1,5 @@
+Given this HTML resume layout, replace all hardcoded values with Mustache placeholders like {{name}}, {{email}}, {{#experience}}...{{/experience}}, etc.
+
+Preserve the structure, formatting, and tags.
+
+Only return valid Mustache HTML. No comments or code fences.

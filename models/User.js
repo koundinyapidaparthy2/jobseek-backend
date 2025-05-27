@@ -1,4 +1,4 @@
-const { db } = require("../utils/firebase.js");
+const { db } = require("../firebase/firebase.js");
 const { v4: uuidv4 } = require("uuid");
 
 const USERS_COLLECTION = db.collection("users");

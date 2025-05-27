@@ -1,0 +1,15 @@
+I want you to extract and recreate a professional resume layout from a PDF or image I provide. Your output must be a clean and accurate HTML file with embedded CSS that matches the original formatting exactly — including:
+
+- Font sizes and weights
+- Section spacing and alignment
+- Two-column layout for organization/location vs. date
+- Bullet point indentation
+- Bold/italic text styles
+- Proper link formatting
+- Consistent margins and spacing
+- Matching visual hierarchy as seen in the original
+
+⚠️ Do not simplify or reformat the content. Maintain the exact structure, labels, and formatting.
+
+Output only a complete HTML file with embedded CSS — ready to open in the browser or export as PDF. Do not add any summaries or commentary. Focus on pixel-perfect layout reproduction.
+  

@@ -7,6 +7,8 @@ const {
   verifyRefreshToken,
 } = require("../utils/token");
 
+const { createOrUpdateUserProfile } = require("../models/profile");
+
 const router = express.Router();
 
 function generateTokens(user) {
@@ -25,6 +27,8 @@ router.post("/signup", async (req, res) => {
 
     const hashed = await bcrypt.hash(password, 10);
     const user = await createUser({ email, password: hashed, name });
+    await createOrUpdateUserProfile(user.id, { name });
+
     const tokens = generateTokens(user);
     res.json({
       user: { id: user.id, email: user.email, name: user.name },
@@ -63,6 +67,7 @@ router.post("/google", async (req, res) => {
     let user = await findUserByEmail(email);
     if (!user) {
       user = await createUser({ email, name, googleId });
+      await createOrUpdateUserProfile(user.id, { name });
     }
     const tokens = generateTokens(user);
     res.json({
