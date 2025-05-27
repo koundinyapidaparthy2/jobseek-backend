@@ -26,17 +26,17 @@ jobs:
 
       - name: Build Docker image
         run: |
-          docker build -t gcr.io/${{ secrets.GCLOUD_PROJECT_ID }}/${{ secrets.CLOUD_RUN_SERVICE }} .
+          docker build -t us-docker.pkg.dev/${{ secrets.GCLOUD_PROJECT_ID }}/jobseek-backend/jobseek-backend .
 
-      - name: Push Docker image to GCR
+      - name: Push Docker image
         run: |
-          gcloud auth configure-docker
-          docker push gcr.io/${{ secrets.GCLOUD_PROJECT_ID }}/${{ secrets.CLOUD_RUN_SERVICE }}
+          gcloud auth configure-docker us-docker.pkg.dev
+          docker push us-docker.pkg.dev/${{ secrets.GCLOUD_PROJECT_ID }}/jobseek-backend/jobseek-backend
 
       - name: Deploy to Cloud Run
         run: |
           gcloud run deploy ${{ secrets.CLOUD_RUN_SERVICE }} \
-            --image gcr.io/${{ secrets.GCLOUD_PROJECT_ID }}/${{ secrets.CLOUD_RUN_SERVICE }} \
+            --image us-docker.pkg.dev/${{ secrets.GCLOUD_PROJECT_ID }}/jobseek-backend/jobseek-backend \
             --region ${{ secrets.CLOUD_RUN_REGION }} \
             --platform managed \
             --allow-unauthenticated \
