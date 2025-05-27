@@ -21,8 +21,8 @@ jobs:
       - name: Set up gcloud SDK
         uses: google-github-actions/setup-gcloud@v1
 
-      - name: Decode and save Firebase service account key
-        run: echo "${{ secrets.GCLOUD_SERVICE_KEY }}" > firebase-service-account.json
+      - name: Decode Firebase service account key
+        run: echo "${{ secrets.GCLOUD_SERVICE_KEY }}" | base64 --decode > firebase-service-account.json
 
       - name: Build Docker image
         run: |
