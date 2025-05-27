@@ -40,7 +40,7 @@ jobs:
             --region ${{ secrets.CLOUD_RUN_REGION }} \
             --platform managed \
             --allow-unauthenticated \
-            --set-env-vars PORT=8080,JWT_SECRET=${{ secrets.JWT_SECRET }},JWT_REFRESH_SECRET=${{ secrets.JWT_REFRESH_SECRET }},OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }}
+            --set-env-vars JWT_SECRET=${{ secrets.JWT_SECRET }},JWT_REFRESH_SECRET=${{ secrets.JWT_REFRESH_SECRET }},OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }}
 
       - name: Cleanup
         run: rm -f firebase-service-account.json
