@@ -41,6 +41,11 @@ jobs:
             --platform managed \
             --allow-unauthenticated \
             --set-env-vars JWT_SECRET=${{ secrets.JWT_SECRET }},JWT_REFRESH_SECRET=${{ secrets.JWT_REFRESH_SECRET }},OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }}
+      
+      - name: Get Cloud Run service URL
+        run: |
+          URL=$(gcloud run services describe ${{ secrets.CLOUD_RUN_SERVICE }} --region ${{ secrets.CLOUD_RUN_REGION }} --format 'value(status.url)')
+          echo "Cloud Run URL: $URL"
 
       - name: Cleanup
         run: rm -f firebase-service-account.json
